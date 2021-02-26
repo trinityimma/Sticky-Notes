@@ -1,146 +1,212 @@
-*{
-    font-family: Avenir, Helvetica, Arial, sans-serif;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    padding: 0;
-    margin: 0;
-    box-sizing: border-box;
+* {
+  font-family: Avenir, Helvetica, Arial, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
 .container {
-    display: flex;
+  display: flex;
 }
 .sidebar {
-    flex-basis: 50%;
-    height: 100vh;
-    background: black;
-    color: white;
-    overflow-y: auto;
+  flex-basis: 5%;
+  height: 100vh;
+  background: black;
+  color: white;
+  overflow-y: auto;
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 .content {
-    flex-basis: 50%;
+  flex-basis: 95%;
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  padding: 10px;
 }
+
 .menu {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 0 5px;
 }
-.menu >div {
-    font-size: 2.5rem;
-    width: 50px;
-    height: 50px;
-    text-align: center;
+.menu > div {
+  font-size: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
-.menu div svg{
-    color: white;
+.menu div svg {
+  color: white;
 }
 .menu > div:hover {
-    background: gray;
+  background: gray;
 }
-.menu .close-menu {
-    display: none;
-}
+
 .sidebar .sub-menu {
-    padding: 10px;
+  padding: 10px;
 }
 .sub-menu h1 {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 .sub-menu .searchbar {
-    width: 100%;
-    display: flex;
-    border: solid 1px black;
-    background: gray;
-    margin-bottom: 10px;
+  width: 100%;
+  display: flex;
+  border: solid 1px black;
+  background: gray;
+  margin-bottom: 10px;
 }
 .sub-menu .searchbar input {
-    flex-basis: 90%;
-    padding: .6rem;
-    background: transparent;
-    border: none;
-    outline: none;
-    color: white;
-    font-size: 1rem;
+  flex-basis: 90%;
+  padding: 0.6rem;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-size: 1rem;
 }
 .sub-menu .searchbar input::placeholder {
-    color: white
+  color: white;
 }
-.sub-menu .searchbar div { 
-    flex-basis: 10%;
-    background: transparent;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.sub-menu .searchbar div {
+  flex-basis: 10%;
+  background: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .sub-menu .note-holder {
-    height: 150px;
-    background: gray;
-    margin-bottom: 10px;
+  height: 150px;
+  background: gray;
+  margin-bottom: 10px;
 }
 .note-holder .line {
-    height: .5rem;
-    width: 100%;
-    background: green;
+  height: 0.5rem;
+  width: 100%;
+  background: green;
 }
 .note-holder .note-date {
-    width: 100%;
-    text-align: right;
-    font-size: .8rem;
-    padding-right: 10px;
+  width: 100%;
+  text-align: right;
+  font-size: 0.8rem;
+  padding-right: 10px;
 }
 .note-holder .note-text {
-    width: 100%;
-    padding: 0 20px 20px;
+  width: 100%;
+  padding: 0 20px 20px;
 }
 .note {
-    width: 300px;
-    height: 300px;
-    background: yellow;
-    box-shadow: 10px 10px 24px 0px rgba(0,0,0,0.75);
+  width: 300px;
+  height: 300px;
+  background: black;
+  box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.75);
+  margin: 10px;
 }
 .note .note-head {
-    display: relative;
+  display: relative;
 }
 .note .note-head .unseen-menu {
-    position: absolute;
-    /* display: none; */
+  position: absolute;
+  display: none;
 }
-.note .note-head .unseen-menu >div{
-    display: flex;
+.note .note-head .unseen-menu > div {
+  display: flex;
 }
-.note .note-head .unseen-menu >div:hover{
-    background: gray;
+.note .note-head .unseen-menu > div:hover {
+  background: gray;
 }
-.note .note-head .unseen-menu div:nth-of-type(1) >div {
-    width: 50px;
-    padding: 20px 0;
-    text-align: center;
+.note .note-head .unseen-menu div:nth-of-type(1) > div {
+  width: 50px;
+  padding: 20px 0;
+  text-align: center;
 }
-.note .note-head .unseen-menu div:nth-of-type(1) >div:hover {
-    background: white;
+.note .note-head .unseen-menu div:nth-of-type(1) > div:hover {
+  background: white;
 }
-.note .note-head .unseen-menu div:nth-of-type(2), .unseen-menu div:nth-of-type(3) {
-    padding: 10px 0;
+.note .note-head .unseen-menu div:nth-of-type(2),
+.unseen-menu div:nth-of-type(3) {
+  padding: 10px 0;
 }
-.note .note-head .unseen-menu div:nth-of-type(2) svg, .unseen-menu div:nth-of-type(3) svg {
-    margin: 0 10px;
+.note .note-head .unseen-menu div:nth-of-type(2) svg,
+.unseen-menu div:nth-of-type(3) svg {
+  margin: 0 10px;
 }
 
 .note .note-head .seen-menu {
-    display: flex;
-    justify-content: space-between;
-    font-size: 30px;
-    background: red;
-    height: 40px;
+  display: flex;
+  justify-content: space-between;
+  font-size: 30px;
+  background: green;
+  height: 40px;
 }
-.note .note-head .seen-menu div:nth-of-type(1), span{
+.note .note-head .seen-menu div {
   text-align: center;
   padding: 0 10px;
   height: 100%;
 }
-.note .note-head .seen-menu div:nth-of-type(1):hover, span:hover{
+.note .note-head .seen-menu .close-menu,
+.seen-menu .close-menu {
+  text-align: center;
+  padding: 0 10px;
+  height: 100%;
+}
+.note .note-head .seen-menu div:nth-of-type(1):hover,
+span:hover {
   background: gray;
 }
+.note .note-body {
+  height: 220px;
+}
+.note .note-body textarea {
+  height: 100%;
+  width: 100%;
+  background: black;
+  padding: 10px;
+  outline: none;
+  font-size: 1rem;
+  color: gray;
+}
 .note .note-foot {
-    height: 45px;
-    border-top: 3px solid white;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  border-top: 2px solid gray;
+}
+.note .note-foot > svg {
+  height: 100%;
+  width: 100%;
+  fill: white;
+  padding: 8px;
+}
+.note .note-foot > svg:hover {
+  background: gray;
+}
+
+.sidebar-maximize {
+  flex-basis: 35%;
+}
+.row {
+  flex-direction: row;
+  justify-content: space-between;
+}
+.sidebar-minimize {
+  flex-basis: 8%;
+}
+.content-maximize {
+  flex-basis: 92%;
+}
+.content-minimize {
+  flex-basis: 65%;
+}
+
+@media (max-width: 700px) {
+  .note {
+    margin: 0 5;
+  }
 }

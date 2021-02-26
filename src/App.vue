@@ -1,29 +1,51 @@
 <template>
-    <main class="container">
-      <aside class="sidebar">
-        <Sidebar>Sidebar</Sidebar>
-      </aside>
-      <section class="content">
-        <Note>Note</Note>
-      </section>
-    </main>
-    </template>
+  <main class="container">
+    <aside
+      class="sidebar"
+      :class="isMenuOpen ? 'sidebar-maximize' : 'sidebar-minimize'"
+    >
+      <Sidebar :notes="this.notes" @set-menu="setMenu" />
+    </aside>
+    <section
+      class="content"
+      :class="isMenuOpen ? 'content-minimize' : 'content-maximize'"
+    >
+      <div v-for="note in notes" :key="note.id">
+        <Note v-if="note.isNoteOpen" :note="note" />
+      </div>
+    </section>
+  </main>
+</template>
 <script>
-import Sidebar from './components/Sidebar'
-import Note from './components/Note'
+import Sidebar from "./components/Sidebar";
+import Note from "./components/Note";
 export default {
-  components: {Sidebar, Note},
+  components: { Sidebar, Note },
   data() {
     return {
-      title: "Sticky Notes",
-    }
-  }
-}
+      id: 1,
+      notes: [],
+      isMenuOpen: false,
+    };
+  },
+  methods: {
+    setMenu(data){
+      this.isMenuOpen = data;
+    },
+    createId() {
+      this.id++;
+    },
+    createNote() {
+      this.createId();
+      const note = {
+        noteText: "",
+        noteDate: "",
+        isNoteOpen: "",
+        noteId: this.id,
+      };
+      this.notes.push(note);
+    },
+
+  },
+};
 </script>
-<style>
-
-.content {
-  padding: 20px;
-}
-</style>
-
