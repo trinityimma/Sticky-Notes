@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="menu" :class="isMenuOpen? 'row': ''">
+    <div class="menu" :class="isMenuOpen ? 'row' : ''">
       <div>
         <span class="open-menu" v-if="!isMenuOpen">
           <svg
@@ -22,7 +22,7 @@
           >x</span
         >
       </div>
-      <div>+</div>
+      <div @click="addNote">+</div>
     </div>
     <div class="sub-menu" v-if="isMenuOpen">
       <h1>Sticky Notes</h1>
@@ -43,11 +43,22 @@
         </div>
       </div>
       <div class="notes-container">
-        <div class="note-holder">
-          <div class="line"></div>
+        <div
+          class="note-holder"
+          v-for="note in notes"
+          :key="note"
+          @dblclick="note.isNoteOpen = true"
+          @mouseover="showDotMenu"
+        >
+          <div
+            class="line"
+            ref="dateRef"
+            :style="{ background: note.noteColor }"
+          ></div>
+          <div class="dot-menu" ref="dotMenuRef">...</div>
           <div class="note-content">
-            <div class="note-date">Jan 22</div>
-            <p class="note-text">Note Text</p>
+            <div class="note-date">{{ note.noteDate }}</div>
+            <textarea class="note-text" v-model="note.noteText" readonly />
           </div>
         </div>
       </div>
@@ -55,16 +66,35 @@
   </div>
 </template>
 <script>
+import { ref } from "vue";
 export default {
+  props: {
+    notes: {
+      type: Array,
+      required: true,
+    },
+  },
   data() {
     return {
       isMenuOpen: false,
     };
   },
+  setup() {
+    const dotMenuRef = ref("");
+    const dateRef = ref("");
+    const showDotMenu = () => {
+      // console.log(dotMenuRef.value.style);
+      // this.dotMenuRef.value.style.display = "";
+    };
+    return { dotMenuRef, dateRef, showDotMenu };
+  },
   methods: {
     setMenu(data) {
       this.isMenuOpen = data;
       this.$emit("set-menu", data);
+    },
+    addNote() {
+      this.$emit("add-note");
     },
   },
 };

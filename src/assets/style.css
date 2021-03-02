@@ -6,13 +6,19 @@
   margin: 0;
   box-sizing: border-box;
 }
+:root {
+  --main-bg-color: #202020;
+  --secondary-bg-color: #404040;
+  --text-color: #eee;
+  --shadow-bg: rgba(255, 255, 255, 0.1);
+}
 .container {
   display: flex;
 }
 .sidebar {
   flex-basis: 5%;
   height: 100vh;
-  background: black;
+  background: var(--main-bg-color);
   color: white;
   overflow-y: auto;
   position: sticky;
@@ -25,6 +31,7 @@
 .content {
   flex-basis: 95%;
   display: flex;
+  flex-direction: row-reverse;
   justify-content: space-around;
   flex-wrap: wrap;
   padding: 10px;
@@ -42,11 +49,9 @@
   justify-content: center;
   align-items: center;
 }
-.menu div svg {
-  color: white;
-}
+
 .menu > div:hover {
-  background: gray;
+  background: var(--shadow-bg);
 }
 
 .sidebar .sub-menu {
@@ -58,8 +63,8 @@
 .sub-menu .searchbar {
   width: 100%;
   display: flex;
-  border: solid 1px black;
-  background: gray;
+  border: solid 1px var(--main-bg-color);
+  background: var(--secondary-bg-color);
   margin-bottom: 10px;
 }
 .sub-menu .searchbar input {
@@ -68,11 +73,11 @@
   background: transparent;
   border: none;
   outline: none;
-  color: white;
+  color: var(--text-color);
   font-size: 1rem;
 }
 .sub-menu .searchbar input::placeholder {
-  color: white;
+  color: var(--text-color);
 }
 .sub-menu .searchbar div {
   flex-basis: 10%;
@@ -80,31 +85,48 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 10px;
 }
 .sub-menu .note-holder {
   height: 150px;
-  background: gray;
+  background: var(--secondary-bg-color);
+  color: var(--text-color);
   margin-bottom: 10px;
+}
+.sub-menu .note-holder:hover {
+  background: #515151;
 }
 .note-holder .line {
   height: 0.5rem;
   width: 100%;
-  background: green;
+}
+.note-holder .dot-menu {
+  font-size: 1.4rem;
+  padding-right: 10px;
+  text-align: right;
+  display: none;
 }
 .note-holder .note-date {
   width: 100%;
   text-align: right;
   font-size: 0.8rem;
-  padding-right: 10px;
+  padding: 10px 10px 10px 0;
 }
 .note-holder .note-text {
   width: 100%;
+  height: 100px;
+  background: transparent;
+  outline: none;
+  border: none;
   padding: 0 20px 20px;
+  color: var(--text-color);
+  overflow: hidden;
+  font-size: 1rem;
 }
 .note {
-  width: 300px;
-  height: 300px;
-  background: black;
+  width: 330px;
+  height: 330px;
+  background: var(--main-bg-color);
   box-shadow: 10px 10px 24px 0px rgba(0, 0, 0, 0.75);
   margin: 10px;
 }
@@ -113,25 +135,47 @@
 }
 .note .note-head .unseen-menu {
   position: absolute;
-  display: none;
+  background: var(--secondary-bg-color);
+  color: var(--text-color);
 }
 .note .note-head .unseen-menu > div {
   display: flex;
 }
-.note .note-head .unseen-menu > div:hover {
-  background: gray;
+.unseen-menu div:nth-of-type(1) div:nth-of-type(1) {
+  background: #d7ad04;
+}
+.unseen-menu div:nth-of-type(1) div:nth-of-type(2) {
+  background: #5eae54;
+}
+.unseen-menu div:nth-of-type(1) div:nth-of-type(3) {
+  background: #da7db5;
+}
+.unseen-menu div:nth-of-type(1) div:nth-of-type(4) {
+  background: #a477d1;
+}
+.unseen-menu div:nth-of-type(1) div:nth-of-type(5) {
+  background: #53b3d8;
+}
+.unseen-menu div:nth-of-type(1) div:nth-of-type(6) {
+  background: #8e8e8e;
+}
+.unseen-menu div:nth-of-type(1) div:nth-of-type(7) {
+  background: #505050;
 }
 .note .note-head .unseen-menu div:nth-of-type(1) > div {
-  width: 50px;
-  padding: 20px 0;
+  width: 47px;
+  padding: 25px 0;
   text-align: center;
 }
-.note .note-head .unseen-menu div:nth-of-type(1) > div:hover {
-  background: white;
-}
+
 .note .note-head .unseen-menu div:nth-of-type(2),
 .unseen-menu div:nth-of-type(3) {
-  padding: 10px 0;
+  padding: 20px 0;
+}
+.unseen-menu div:nth-of-type(1) > div:hover,
+.unseen-menu div:nth-of-type(2):hover,
+.unseen-menu div:nth-of-type(3):hover {
+  background: var(--shadow-bg);
 }
 .note .note-head .unseen-menu div:nth-of-type(2) svg,
 .unseen-menu div:nth-of-type(3) svg {
@@ -143,7 +187,7 @@
   justify-content: space-between;
   font-size: 30px;
   background: green;
-  height: 40px;
+  height: 35px;
 }
 .note .note-head .seen-menu div {
   text-align: center;
@@ -158,19 +202,19 @@
 }
 .note .note-head .seen-menu div:nth-of-type(1):hover,
 span:hover {
-  background: gray;
+  background: var(--shadow-bg);
 }
 .note .note-body {
-  height: 220px;
+  height: 255px;
 }
 .note .note-body textarea {
   height: 100%;
   width: 100%;
-  background: black;
+  background: var(--margin-);
   padding: 10px;
   outline: none;
   font-size: 1rem;
-  color: gray;
+  color: var(--text-color);
 }
 .note .note-foot {
   height: 40px;
@@ -181,11 +225,11 @@ span:hover {
 .note .note-foot > svg {
   height: 100%;
   width: 100%;
-  fill: white;
+  fill: var(--text-color);
   padding: 8px;
 }
 .note .note-foot > svg:hover {
-  background: gray;
+  background: var(--shadow-bg);
 }
 
 .sidebar-maximize {
@@ -208,5 +252,14 @@ span:hover {
 @media (max-width: 700px) {
   .note {
     margin: 0 5;
+  }
+  .sub-menu .searchbar input {
+    padding: 0.6rem 0.2rem 0.6rem 0.2rem;
+  }
+
+  .sub-menu .searchbar div {
+    position: relative;
+    left: -10px;
+    width: 16px;
   }
 }

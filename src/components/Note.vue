@@ -1,14 +1,15 @@
 <template>
   <div class="note">
     <div class="note-head">
-      <div class="unseen-menu">
+      <div class="unseen-menu" v-if="isMenuOpen">
         <div>
-          <div style="background: red;"></div>
-          <div style="background: purple;"></div>
-          <div style="background: green;"></div>
-          <div style="background: violet;"></div>
-          <div style="background: gray;"></div>
-          <div style="background: blue;"></div>
+          <div @click="changeBackground('#d7ad04')"></div>
+          <div @click="changeBackground('#5eae54')"></div>
+          <div @click="changeBackground('#da7db5')"></div>
+          <div @click="changeBackground('#a477d1')"></div>
+          <div @click="changeBackground('#53b3d8')"></div>
+          <div @click="changeBackground('#8e8e8e')"></div>
+          <div @click="changeBackground('#505050')"></div>
         </div>
         <div class="note-list">
           <svg
@@ -27,7 +28,7 @@
           </svg>
           <p>Notes list</p>
         </div>
-        <div class="note-delete">
+        <div class="note-delete" @click="deleteNote">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="16"
@@ -47,16 +48,23 @@
           <p>Delete Note</p>
         </div>
       </div>
-      <div class="seen-menu">
-        <div>+</div>
+      <div class="seen-menu" :style="{ background: noteR.noteColor }">
+        <div @click="addNote">+</div>
         <div>
-          <span class="open-menu">...</span>
-          <span class="close-menu">x</span>
+          <span class="open-menu" @click="isMenuOpen = true">...</span>
+          <span class="close-menu" @click="closeNote">x</span>
         </div>
       </div>
     </div>
     <div class="note-body">
-      <textarea class="editor" placeholder="Take a note..."></textarea>
+      <textarea
+        class="editor"
+        placeholder="Take a note..."
+        v-model="noteR.noteText"
+        @input="update"
+        @click="isMenuOpen = false"
+        @focusout="save"
+      ></textarea>
     </div>
     <div class="note-foot">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
@@ -98,19 +106,58 @@ export default {
   props: {
     note: {
       type: Object,
-      required: false,
+      required: true,
       default: () => {
         return {
           noteText: "",
-          noteDate: "",
+          noteDate: new Date(),
+          isNoteOpen: true,
         };
       },
     },
   },
-  computed: {},
+  data() {
+    return {
+      noteText: "",
+      noteR: {
+        noteText: "",
+        noteDate: "",
+        isNoteOpen: true,
+        id: this.note.id,
+        noteColor: "#a477d1",
+      },
+      isMenuOpen: false,
+    };
+  },
+  mounted() {
+    this.noteR.noteText = this.note.noteText;
+    this.noteR.noteDate = this.note.noteDate;
+    this.noteR.isNoteOpen = this.note.isNoteOpen;
+    this.noteR.noteColor = this.note.noteColor;
+  },
+
   methods: {
     update() {
-      this.$emite("updateNote", this.note);
+      this.$emit("update-note", this.noteR);
+    },
+    save() {
+      this.$emit("save-note", this.noteR);
+    },
+    addNote() {
+      this.$emit("add-note");
+    },
+    closeNote() {
+      this.noteR.isNoteOpen = false;
+      this.save();
+    },
+    deleteNote() {
+      this.isMenuOpen = false;
+      this.$emit("delete-note");
+    },
+    changeBackground(color) {
+      this.noteR.noteColor = color;
+      this.isMenuOpen = false;
+      this.save();
     },
   },
 };
