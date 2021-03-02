@@ -27,7 +27,7 @@
     <div class="sub-menu" v-if="isMenuOpen">
       <h1>Sticky Notes</h1>
       <div class="searchbar">
-        <input placeholder="Search..." />
+        <input placeholder="Search..." v-model="search" />
         <div>
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -45,7 +45,7 @@
       <div class="notes-container">
         <div
           class="note-holder"
-          v-for="note in notes"
+          v-for="note in filteredNotes"
           :key="note"
           @dblclick="note.isNoteOpen = true"
           @mouseover="showDotMenu"
@@ -74,9 +74,17 @@ export default {
       required: true,
     },
   },
+  computed: {
+    filteredNotes() {
+      return this.notes.filter((note) => {
+        return note.noteText.toLowerCase().includes(this.search.toLowerCase());
+      });
+    },
+  },
   data() {
     return {
       isMenuOpen: false,
+      search: "",
     };
   },
   setup() {

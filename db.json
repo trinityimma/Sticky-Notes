@@ -1,3 +1,18 @@
 {
-  "notes": []
+  "notes": [
+    {
+      "noteText": "OK thanks",
+      "noteDate": "3/2/2021",
+      "isNoteOpen": false,
+      "id": 113,
+      "noteColor": "#5eae54"
+    },
+    {
+      "noteText": "I love being myself",
+      "noteDate": "3/2/2021",
+      "isNoteOpen": false,
+      "id": 123,
+      "noteColor": "#d7ad04"
+    }
+  ]
 }

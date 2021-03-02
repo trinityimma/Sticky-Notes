@@ -4,7 +4,11 @@
       class="sidebar"
       :class="isMenuOpen ? 'sidebar-maximize' : 'sidebar-minimize'"
     >
-      <Sidebar :notes="notes" @set-menu="setMenu" @add-note="addNote" />
+      <Sidebar
+        :notes="notes"
+        @set-menu="setMenu"
+        @add-note="addNote"
+      />
     </aside>
     <section
       class="content"
@@ -50,6 +54,7 @@ export default {
       this.notes = res.data;
     });
   },
+  computed: {},
   methods: {
     setMenu(data) {
       this.isMenuOpen = data;
@@ -63,9 +68,7 @@ export default {
           max = this.notes[i].id;
         }
       }
-      console.log(max);
       this.id = max + 10;
-      console.log(this.id);
     },
     async addNote() {
       this.createId();
@@ -98,9 +101,7 @@ export default {
       this.notes[index] = data;
     },
     async saveNote(data) {
-      console.log(data);
       const index = this.notes.findIndex((note) => note.id == data.id);
-      console.log(data.id);
       await axios
         .put(`notes/${data.id}`, data)
         .then((res) => {
